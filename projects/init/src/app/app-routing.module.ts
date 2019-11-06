@@ -9,18 +9,6 @@ import { ByeComponent } from "./home/bye/bye.component";
 
 import { RedirectModule } from "shared/modules/redirect/redirect.module";
 
-import { App1SharedModule } from "projects/app1/src/app/app.module";
-import { AuditSharedModule } from "projects/audit/src/app/app.module";
-import { CrudSharedModule } from "projects/crud/src/app/app.module";
-import { DashboardSharedModule } from "projects/dashboard/src/app/app.module";
-
-import { DisplaySharedModule } from "projects/display/src/app/app.module";
-import { ReportSharedModule } from "projects/reports/src/app/app.module";
-import { SmsSharedModule } from "projects/sms/src/app/app.module";
-import { SystemSharedModule } from "projects/system/src/app/app.module";
-
-import { UserSharedModule } from "projects/user/src/app/app.module";
-
 import { ViewSharedModule } from "projects/view/src/app/app.module";
 
 const routes: Routes = [
@@ -51,20 +39,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     RedirectModule,
-
-    AuditSharedModule.forRoot(),
-    CrudSharedModule.forRoot(),
-    DashboardSharedModule.forRoot(),
-
-    DisplaySharedModule.forRoot(),
-    ReportSharedModule.forRoot(),
-    SmsSharedModule.forRoot(),
-
-    SystemSharedModule.forRoot(),
-
-    UserSharedModule.forRoot(),
-
-    App1SharedModule.forRoot(),
 
     ViewSharedModule.forRoot()
   ],

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserSelectionModel, AlertModel } from "shared/models";
 
-import { DisplayMonitorByCallsService } from "projects/display/src/app/shared/services";
-import { DisplayMonitorByCallsModel } from "projects/display/src/app/shared/models";
+import { DisplayMonitorByCallsService } from "projects/view/src/app/shared/services";
+import { DisplayMonitorByCallsModel } from "projects/view/src/app/shared/models";
 
 // Installed modules
 import { Observable, Subscription, timer } from "rxjs";

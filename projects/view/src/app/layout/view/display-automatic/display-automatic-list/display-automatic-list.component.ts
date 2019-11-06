@@ -27,10 +27,10 @@ import { UserSelectionService } from "shared/services/";
 import {
   DisplayAutomaticModel,
   DisplayAutomaticResponseModel
-} from "projects/display/src/app/shared/models/";
+} from "projects/view/src/app/shared/models/";
 
 // Local shared
-import { DisplayAutomaticIndicatorsService } from "projects/display/src/app/shared/services/";
+import { DisplayAutomaticIndicatorsService } from "projects/view/src/app/shared/services/";
 
 @Component({
   selector: "app-display-display-automatic-list",
