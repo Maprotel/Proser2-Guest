@@ -28,8 +28,8 @@ export class DisplayMonitorComponent implements OnInit {
     private envService: EnvService,
     private userSelectionService: UserSelectionService
   ) {
-    this.userSelection = this.userSelectionService.readUserSelection(
-      "proser_store"
+    this.userSelection = this.userSelectionService.readUserSelectionHistoric(
+      "proser_historic"
     );
     this.selectorVisibleFields = new UserSelectionModel("visible");
     this.title = "Dashboard llamadas entrantes";
@@ -46,7 +46,7 @@ export class DisplayMonitorComponent implements OnInit {
     this.userSelection.title = this.title;
     // //
     // //
-    this.userSelectionService.writeUserSelection(this.userSelection);
+    this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
 
     this.selectorVisibleFields.assignation = false;
     this.selectorVisibleFields.auxiliar = false;

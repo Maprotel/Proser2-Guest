@@ -7,6 +7,11 @@ import { EnvService } from "shared/services/helpers/env.service";
 import { UserSelectionModel } from "shared/models/";
 import { stringifySelection } from "shared/functions";
 
+import {
+  selectorOptionSubtitles,
+  selectorLegendSubtitles
+} from "shared/functions";
+
 @Injectable({
   providedIn: "root"
 })
@@ -49,33 +54,73 @@ export class UserSelectionService {
       );
   }
 
-  readUserSelection(local_store?): UserSelectionModel {
+  readUserSelectionHistoric(local_store?): UserSelectionModel {
     let userSelection = new UserSelectionModel();
-    let proser_store = { userSelection: userSelection };
-    let proser_store_temp;
+    let proser_historic = { userSelection: userSelection };
+    let proser_historic_temp;
     let userSelection_temp;
 
     try {
-      proser_store_temp = JSON.parse(localStorage.getItem(`proser_store`));
-      userSelection_temp = proser_store_temp["userSelection"];
+      proser_historic_temp = JSON.parse(
+        localStorage.getItem(`proser_historic`)
+      );
+      userSelection_temp = proser_historic_temp["userSelection"];
 
-      if (proser_store_temp === null) {
-        localStorage.setItem(`proser_store`, JSON.stringify(proser_store));
+      if (proser_historic_temp === null) {
+        localStorage.setItem(
+          `proser_historic`,
+          JSON.stringify(proser_historic)
+        );
       } else {
-        proser_store.userSelection = userSelection_temp;
+        proser_historic.userSelection = userSelection_temp;
         userSelection = userSelection_temp;
       }
     } catch (e) {
       userSelection = new UserSelectionModel();
-      proser_store = { userSelection: userSelection };
-      localStorage.setItem(`proser_store`, JSON.stringify(proser_store));
+      proser_historic = { userSelection: userSelection };
+      localStorage.setItem(`proser_historic`, JSON.stringify(proser_historic));
     }
     return userSelection;
   }
 
-  writeUserSelection(userSelection, local_store?) {
-    let proser_store = { userSelection: userSelection };
-    localStorage.setItem(`proser_store`, JSON.stringify(proser_store));
+  readUserSelectionCurrent(local_store?): UserSelectionModel {
+    let userSelection = new UserSelectionModel();
+    let proser_current = { userSelection: userSelection };
+    let proser_current_temp;
+    let userSelection_temp;
+
+    try {
+      proser_current_temp = JSON.parse(localStorage.getItem(`proser_current`));
+      userSelection_temp = proser_current_temp["userSelection"];
+
+      if (proser_current_temp === null) {
+        localStorage.setItem(`proser_current`, JSON.stringify(proser_current));
+      } else {
+        proser_current.userSelection = userSelection_temp;
+        userSelection = userSelection_temp;
+      }
+    } catch (e) {
+      userSelection = new UserSelectionModel();
+      proser_current = { userSelection: userSelection };
+      localStorage.setItem(`proser_current`, JSON.stringify(proser_current));
+    }
+    return userSelection;
+  }
+
+  writeUserSelectionHistoric(userSelection) {
+
+
+    let proser_historic = { userSelection };
+    localStorage.setItem(`proser_historic`, JSON.stringify(proser_historic));
+
+    return userSelection;
+  }
+
+  writeUserSelectionCurrent(userSelection) {
+
+
+    let proser_current = { userSelection };
+    localStorage.setItem(`proser_current`, JSON.stringify(proser_current));
     return userSelection;
   }
 }

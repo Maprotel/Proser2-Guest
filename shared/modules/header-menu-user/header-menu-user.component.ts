@@ -1,5 +1,5 @@
 import { EnvService } from "shared/services";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { AuthService } from "shared/services/helpers/auth.service";
 
 import { Router } from "@angular/router";
@@ -16,6 +16,9 @@ import {
   styleUrls: ["./header-menu-user.component.scss"]
 })
 export class HeaderMenuUserComponent implements OnInit {
+
+  @Input() showInMenu;
+  @Input() currentUser;
   // Icons
   faSignOutAlt = faSignOutAlt;
   faIdBadge = faIdBadge;
@@ -23,7 +26,6 @@ export class HeaderMenuUserComponent implements OnInit {
 
   env;
 
-  currentUser;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -33,20 +35,20 @@ export class HeaderMenuUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCurrentUser();
   }
 
   onLogout() {
     this.authService.logoutUser().subscribe(data => {
-      this.router.navigate(["/init/home"]);
+      this.router.navigate(["/bye"]);
     });
   }
 
-  onProfile() {
-    this.router.navigate(["/user/layout/login/login-profile"]);
+  onLogin() {
+    this.router.navigate(["/login"]);
   }
 
-  getCurrentUser() {
-    this.currentUser = this.authService.getCurrentUser();
+  onProfile() {
+    this.router.navigate(["/profile"]);
   }
+
 }

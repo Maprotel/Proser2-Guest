@@ -1,4 +1,14 @@
 @import "shared/styles/styles";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.json-selector {
+  font-size: 1rem;
+  padding: 20px;
+}
+
+h3 {
+  font-weight: 700;
+}
 
 .main {
   margin: 10px;

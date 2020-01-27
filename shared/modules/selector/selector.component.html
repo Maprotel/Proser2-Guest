@@ -6,30 +6,11 @@
 
   <form [formGroup]="selectorForm" class="register">
     <section class="register-form">
-      <article class="register-column">
-        <div class="form-group two-column" id="mode"
-             *ngIf="selectorVisibleFields.mode">
-          <label
-                 class="register-label">{{ model.fieldInfo("mode").text}}</label>
+      <article class="register-column" *ngIf="selectorVisibleAreas.date">
 
-          <div>
-            <ng-select class="register-input" [items]="menuOptions.mode"
-                       bindLabel="name" placeholder="Modo"
-                       [dropdownPosition]="'auto'" [searchable]="false"
-                       [clearable]="false" [multiple]="false"
-                       hideSelected="true" formControlName="mode"
-                       (change)="onChange()">
-            </ng-select>
-          </div>
-
-          <div *ngIf="f.mode.dirty && f.mode.errors" class="register-error">
-            <div *ngIf="f.mode.errors.required">
-              Este dato es obligatorio
-            </div>
-          </div>
-        </div>
         <!-------------------------- FIELD END --------------------------->
-
+        <h3>Fecha & hora</h3>
+        <hr>
         <!-- start_date -->
         <div class="form-group two-column" id="start_date"
              *ngIf="selectorVisibleFields.start_date">
@@ -74,81 +55,6 @@
           </div>
         </div>
         <!-------------------------- FIELD END --------------------------->
-        <!-- start_time -->
-        <!-- <div
-          class="form-group two-column"
-          id="start_time"
-          *ngIf="selectorVisibleFields.start_time"
-        >
-          <label class="register-label">{{
-            model.fieldInfo("start_time").text
-          }}</label>
-
-          <div class="register-input">
-            <ng-select
-              [items]="menuOptions.start_time"
-              bindLabel="name"
-              placeholder="Hora inicio"
-              [dropdownPosition]="'auto'"
-              [searchable]="false"
-              (change)="onChange()"
-              [clearable]="false"
-              [multiple]="false"
-              hideSelected="true"
-              formControlName="start_time"
-              (change)="onChange()"
-            >
-            </ng-select>
-          </div>
-
-          <div
-            *ngIf="f.start_time.dirty && f.start_time.errors"
-            class="register-error"
-          >
-            <div *ngIf="f.start_time.errors.required">
-              Este dato es obligatorio
-            </div>
-          </div>
-        </div> -->
-        <!-------------------------- FIELD END --------------------------->
-
-        <!-- end_time -->
-        <!-- <div
-          class="form-group two-column"
-          id="end_time"
-          *ngIf="selectorVisibleFields.end_time"
-        >
-          <label class="register-label">{{
-            model.fieldInfo("end_time").text
-          }}</label>
-
-          <div class="register-input">
-            <ng-select
-              [items]="menuOptions.end_time"
-              bindLabel="name"
-              placeholder="Hora final"
-              [dropdownPosition]="'auto'"
-              [searchable]="false"
-              (change)="onChange()"
-              [clearable]="false"
-              [multiple]="false"
-              hideSelected="true"
-              formControlName="end_time"
-              (change)="onChange()"
-            >
-            </ng-select>
-          </div>
-          <div
-            *ngIf="f.end_time.dirty && f.end_time.errors"
-            class="register-error"
-          >
-            <div *ngIf="f.end_time.errors.required">
-              Este dato es obligatorio
-            </div>
-          </div>
-        </div> -->
-
-
 
         <!-- start_time_hour -->
         <div class="form-group two-column" id="start_time"
@@ -199,7 +105,10 @@
         <!-------------------------- FIELD END --------------------------->
       </article>
 
-      <article class="register-column">
+      <article class="register-column" *ngIf="selectorVisibleAreas.interval">
+
+        <h3>Intervalos</h3>
+        <hr>
 
         <!-- interval -->
         <div class="form-group two-column" id="interval"
@@ -277,27 +186,7 @@
 
         <hr>
 
-        <!-- status -->
-        <div class="form-group two-column" id="status"
-             *ngIf="selectorVisibleFields.status">
-          <label
-                 class="register-label">{{model.fieldInfo('status').text}}</label>
 
-          <div class="register-input">
-            <ng-select [items]="menuOptions.status" bindLabel="name"
-                       placeholder="Estatus" [dropdownPosition]="'auto'"
-                       [searchable]="false" [clearable]="false"
-                       [multiple]="false" hideSelected="true"
-                       formControlName="status" (change)="onStatusChange()">
-            </ng-select>
-          </div>
-
-          <div *ngIf="f.status.dirty && f.status.errors" class="register-error">
-            <div *ngIf="f.status.errors.required">
-              Este dato es obligatorio
-            </div>
-          </div>
-        </div>
 
         <!-------------------------- FIELD END --------------------------->
 
@@ -353,8 +242,9 @@
       </article>
 
 
-      <article class="register-column">
-
+      <article class="register-column" *ngIf="selectorVisibleAreas.options">
+        <h3>Opciones</h3>
+        <hr>
         <!-- supervisor -->
         <div class="form-group two-column" id="supervisor"
              *ngIf="selectorVisibleFields.supervisor">
@@ -551,7 +441,8 @@ model.fieldInfo('client').text
 
       </article>
       <article class="register-column">
-
+        <h3>General</h3>
+        <hr>
 
         <div class="button-group">
 
@@ -562,20 +453,83 @@ model.fieldInfo('client').text
           <button (click)="onReset()"
                   class="btn btn-secondary">Resetear</button>
           <hr>
+          <!-- status -->
+          <div class="form-group two-column" id="status"
+               *ngIf="selectorVisibleFields.status && selectorVisibleAreas.buttons">
+            <label
+                   class="register-label">{{model.fieldInfo('status').text}}</label>
+
+            <div class="register-input">
+              <ng-select [items]="menuOptions.status" bindLabel="name"
+                         placeholder="Estatus" [dropdownPosition]="'auto'"
+                         [searchable]="false" [clearable]="false"
+                         [multiple]="false" hideSelected="true"
+                         formControlName="status" (change)="onStatusChange()">
+              </ng-select>
+            </div>
+
+            <div *ngIf="f.status.dirty && f.status.errors"
+                 class="register-error">
+              <div *ngIf="f.status.errors.required">
+                Este dato es obligatorio
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group two-column" id="mode"
+               *ngIf="selectorVisibleFields.mode && selectorVisibleAreas.buttons">
+            <label
+                   class="register-label">{{ model.fieldInfo("mode").text}}</label>
+
+            <div>
+
+              <label class="h3">{{userSelection.mode.name}}
+                <!-- <span
+                 *ngIf="userSelection.mode.name === 'Actual'">{{userSelection.current_date.year}}-{{userSelection.current_date.month}}-{{userSelection.current_date.day}}
+           </span> -->
+
+              </label>
+              <!-- <ng-select class=" register-input" [items]="menuOptions.mode"
+                 bindLabel="name" placeholder="Modo"
+                 [dropdownPosition]="'auto'" [searchable]="false"
+                 [clearable]="false" [multiple]="false" hideSelected="true"
+                 formControlName="mode" (change)="onChange()">
+             </ng-select> -->
+            </div>
+
+            <div *ngIf="f.mode.dirty && f.mode.errors" class="register-error">
+              <div *ngIf="f.mode.errors.required">
+                Este dato es obligatorio
+              </div>
+            </div>
+          </div>
+
+          <hr>
 
           <button (click)="getUserSelectionMenus()"
+                  *ngIf="selectorVisibleAreas.buttons"
                   class="btn btn-outline-primary">Actualizar Menus</button>
 
           <hr>
 
+          <button (click)="getUserJsonSelector()"
+                  *ngIf="selectorVisibleAreas.buttons"
+                  class="btn btn-outline-secondary">JSON selector</button>
+
           <!-- END BUTTONS -->
         </div>
+
+
       </article>
     </section>
-    <!-- <button (click)="onInit()" class="btn btn-lg btn-primary">Inicializar</button>
-    <button (click)="getUserSelectionMenus()" class="btn btn-lg btn-success">Leer opciones</button> -->
 
   </form>
+
+  <section class="json-selector" *ngIf="jsonSelector">
+    <p>{{userSelection | json}}</p>
+  </section>
 </main>
 
 

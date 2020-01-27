@@ -1,17 +1,37 @@
 import { Injectable } from "@angular/core";
 
-@Injectable()
+// Host
+// export const host: string = "http://127.0.0.1/";
+@Injectable(
+)
 export class EnvService {
   // The values that are defined here are the default values that can
   // be overridden by env.js
 
+  // const host: string = "http://127.0.0.1/";
+
+  public host = "http://localhost:4200";
+  public home = "http://localhost:4200";
+  public externalAssets = '/assets'
+
+  public auditLink = this.host + '/proser_reports/dist/audit/'
+  public crudLink = this.host + '/proser_reports/dist/crud/'
+  public dashboardLink = this.host + '/proser_reports/dist/dashboard/'
+  public displayLink = this.host + '/proser_reports/dist/display/'
+  public homeLink = this.host + '/proser_reports/dist/home/'
+  public reportsLink = this.host + '/proser_reports/dist/reports/'
+  public smsLink = this.host + '/proser_reports/dist/sms/'
+  public systemLink = this.host + '/proser_reports/dist/system/'
+  public userLink = this.host + '/proser_reports/dist/user/'
+  public viewLink = this.host + '/proser_reports/dist/view/'
+
   // API url
-  public loopbackApiUrl = "http://127.0.0.1:3151";
-  public systemApiUrl = "http://127.0.0.1:3152";
-  public userApiUrl = "http://127.0.0.1:3153";
+  public loopbackApiUrl = "http://localhost:3151";
+  public systemApiUrl = "http://localhost:3152";
+  public userApiUrl = "http://localhost:3153";
 
   // Version
-  public version = "2.2.3";
+  public version = "2.3.7";
 
   // Callcenter Name
   public callcenterName = "Test CallCenter";
@@ -35,22 +55,6 @@ export class EnvService {
   // Show/Hide Register user option
   public autoregister = true;
 
-  public config = [
-    {
-      configName: "STANDARD",
-      loopbackApiUrl: "http://localhost:3151",
-      systemApiUrl: "http://localhost:3152",
-      systemUser: "http://localhost:3153",
-      callcenterName: "PROSER - Call center",
-      callcenterSlogan: "Proser executive services",
-      callcenterLogo: "assets/img/logos_proser/proser-icon-sm.png",
-      callcenterSite: "http://www.maprotel.com/",
-      autoregister: false,
-      waitTime: 20,
-      enableDebug: true
-    }
-  ];
 
-  current = 0;
-  constructor() {}
+  constructor() { }
 }

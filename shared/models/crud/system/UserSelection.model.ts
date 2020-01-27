@@ -1,8 +1,11 @@
 import {
   selectionToText,
   optionsToText,
-  dateToDatePicker
+  dateToDatePicker,
+  selectorOptionSubtitles,
+  selectorLegendSubtitles
 } from "shared/functions";
+
 import * as moment from "moment";
 import groupList from "shared/data/selector-group-list.data";
 
@@ -60,14 +63,14 @@ export class UserSelectionModel {
     if (options === "standard" || options === null) {
       // TEXT
       this.title = "Título";
-      this.entity_selection = "Selector";
-      this.options = "Opciones";
-      this.legend = "Leyenda";
+      this.entity_selection = "-";
+      this.options = "-";
+      this.legend = "-";
       this.start_date = dateToDatePicker(moment().format("YYYY-MM-DD"));
       this.end_date = dateToDatePicker(moment().format("YYYY-MM-DD"));
 
       // OBJECTCS
-      this.mode = { id: 0, name: "Actual", value: true };
+      this.mode = { id: 1, name: "Historic", value: true };
       this.type = { id: 0, name: "Ejecutado" };
       this.start_time = { id: 0, value: "00:00:00" };
       this.end_time = { id: 0, value: "23:59:59" };
@@ -134,8 +137,8 @@ export class UserSelectionModel {
       this.options = "Options";
       this.legend = "Legend";
       this.mode = [
-        { id: 0, name: "Actual", value: true },
-        { id: 0, name: "Histórico", value: false }
+        { id: 0, name: "Actual", value: "actual" },
+        { id: 1, name: "Histórico", value: "historic" }
       ];
       this.type = [{ id: 0, name: "Ejecutado" }];
 
@@ -184,10 +187,10 @@ export class UserSelectionModel {
     }
 
     if (options === "visible") {
-      this.title = false;
-      this.entity_selection = false;
-      this.options = false;
-      this.legend = false;
+      this.title = true;
+      this.entity_selection = true;
+      this.options = true;
+      this.legend = true;
       this.mode = true;
       this.type = true;
 
@@ -200,8 +203,8 @@ export class UserSelectionModel {
 
       this.login = true;
 
-      this.auxiliar = false;
-      this.assignation = false;
+      this.auxiliar = true;
+      this.assignation = true;
 
       this.client = true;
       this.queue = true;
@@ -218,16 +221,16 @@ export class UserSelectionModel {
       this.interval = true;
 
       this.groupBy = true;
-      this.orderBy = false;
-      this.limitBy = false;
+      this.orderBy = true;
+      this.limitBy = true;
 
       this.status = true;
-      this.start_time_hour = false;
-      this.end_time_hour = false;
+      this.start_time_hour = true;
+      this.end_time_hour = true;
 
-      this.creation_time = false;
-      this.creation_date = false;
-      this.current_date = false;
+      this.creation_time = true;
+      this.creation_date = true;
+      this.current_date = true;
     }
   }
 

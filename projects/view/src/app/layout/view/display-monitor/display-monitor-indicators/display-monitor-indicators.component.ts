@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserSelectionModel, AlertModel } from "shared/models";
 
-import { DisplayMonitorByIndicatorsService } from "projects/view/src/app/shared/services";
-import { DisplayMonitorByIndicatorsModel } from "projects/view/src/app/shared/models";
+import { DisplayMonitorByIndicatorsService } from "projects/view/src/shared/services";
+import { DisplayMonitorByIndicatorsModel } from "projects/view/src/shared/models";
 
 // Installed modules
 import { Observable, Subscription, timer } from "rxjs";
@@ -16,6 +16,8 @@ import {
   dateToDatePicker
 } from "shared/functions";
 
+
+import { ExcelService } from "projects/view/src/shared/services/helpers/excel.service";
 @Component({
   selector: "app-display-display-monitor-indicators",
   templateUrl: "./display-monitor-indicators.component.html",
@@ -52,10 +54,15 @@ export class DisplayMonitorIndicatorsComponent implements OnInit {
 
   // fake
   historic;
+  title;
+
+  //
+  exportName;
+  selectorVisibleAreas;
 
   constructor(
     private displayMonitorByIndicatorsService: DisplayMonitorByIndicatorsService,
-
+    private excelService: ExcelService,
     private userSelectionService: UserSelectionService,
     private alertService: AlertService
   ) {
@@ -63,30 +70,24 @@ export class DisplayMonitorIndicatorsComponent implements OnInit {
     this.selectorVisibleFields = new UserSelectionModel("menuOptions");
     this.selectorVisibleFields.start_date = false;
     this.selectorVisibleFields.end_date = false;
+    this.selectorVisibleFields.start_time = false;
+    this.selectorVisibleFields.end_time = false;
     this.rows = new DisplayMonitorByIndicatorsModel();
     this.alertMessage = new AlertModel();
     this.timerConnected = 0;
-    // this.dashboardOptions = [
-    //   {
-    //     id: 1,
-    //     name: "Supervisores"
-    //   },
-    //   {
-    //     id: 1,
-    //     name: "Agentes"
-    //   }
-    // ];
+    this.exportName = "Indicadores_tiempo_real";
+    this.selectorVisibleAreas = {
+      date: true,
+      interval: false,
+      options: false,
+      buttons: false,
+    }
   }
 
   ngOnInit() {
-    this.userSelection = new UserSelectionModel("standard");
-
-    this.userSelection.mode.name = "Actual";
-    this.old_end_date = this.userSelection.end_date;
-    this.old_start_date = this.userSelection.start_date;
-
+    this.title = ("Indicadores tiempo real");
+    this.userSelectionCurrent();
     this.getMonitorList(this.userSelection);
-    this.setReportTitles("Monitor de indicadores");
     this.onRepeat();
   }
 
@@ -95,16 +96,15 @@ export class DisplayMonitorIndicatorsComponent implements OnInit {
     this.userSelection.end_date = this.old_end_date;
     this.userSelection.start_date = this.old_start_date;
 
-    this.userSelectionService.writeUserSelection(
-      this.userSelection,
-      this.local_store
-    );
+    this.userSelectionService.writeUserSelectionCurrent(this.userSelection);
     this.subscription.unsubscribe();
   }
 
+  onSelect(event) { }
+
   // Get records from backend
   getMonitorList(userSelection: UserSelectionModel) {
-    this.userSelection.mode.name = "Actual";
+    this.userSelection.mode = { id: 0, name: "Actual", value: 'actual' };
     this.userSelection.start_date = this.userSelection.current_date;
     this.userSelection.end_date = this.userSelection.current_date;
     this.displayMonitorByIndicatorsService
@@ -117,6 +117,7 @@ export class DisplayMonitorIndicatorsComponent implements OnInit {
             this.rows_total = res.total;
             this.update_date = res.now;
             this.show = true;
+
           } else {
             console.error("Error", res);
           }
@@ -138,7 +139,7 @@ export class DisplayMonitorIndicatorsComponent implements OnInit {
   // Update on return of selector in header
   onReturnHeaderResult(event) {
     this.show = false;
-    this.userSelection = this.userSelectionService.readUserSelection(
+    this.userSelection = this.userSelectionService.readUserSelectionCurrent(
       this.local_store
     );
 
@@ -163,12 +164,75 @@ export class DisplayMonitorIndicatorsComponent implements OnInit {
     });
   }
 
-  setReportTitles(title) {
-    this.userSelection.title = title;
 
-    this.userSelectionService.writeUserSelection(this.userSelection);
+  // Export to excel
+  exportToExcel(data) {
+    const filterData = data.map(x => {
+      return {
 
+        cola: x.queueName,
+
+        nombre_dia: x.day_name,
+        dia_semana: x.week_day,
+        fecha_inicio: x.start_date,
+        hora_inicio: x.start_time,
+        hora_fin: x.end_time,
+
+        llamadas_recibidas: x.inboundReceived,
+        llamadas_abandonadas: x.inboundAbandoned,
+        llamadas_atendidas: x.inboundAttended,
+        llamadas_cortas: x.inboundShort,
+
+        tiempo_ideal_respuesta: x.idealResponseTime,
+
+        llamadas_atendidas_antes_de: x.inboundBeforeTime,
+        llamadas_atendidas_despues_de: x.inboundAfterTime,
+
+        nivel_servicio: x.inboundServiceLevel,
+        nivel_atencion: x.inboundAttentionLevel,
+        nivel_abandono: x.inboundAbandonLevel,
+
+        seg_operacion: x.operation_seconds,
+        tiempo_operacion: x.operation_time,
+
+        seg_espera: x.wait_seconds,
+        tiempo_espera: x.wait_time,
+
+        tmo_entrante: x.inboundTmo,
+        asa_entrante: x.inboundAsa,
+
+
+      };
+    });
+
+    this.excelService.exportAsExcelFile(filterData, this.exportName);
+  }
+
+
+  userSelectionCurrent() {
+    this.userSelection = this.userSelectionService.readUserSelectionCurrent();
+    this.selectorVisibleFields.groupBy = false;
+    this.selectorVisibleFields.interval = false;
     this.selectorVisibleFields.assignation = false;
     this.selectorVisibleFields.auxiliar = false;
+
+    this.selectorVisibleFields.start_date = false;
+    this.selectorVisibleFields.end_date = false;
+
+    this.userSelection.title = this.title;
+
+    this.userSelection.mode = { id: 0, name: "Actual", value: "actual" };
+    this.userSelection.start_date = dateToDatePicker(
+      moment().format("YYYY-MM-DD")
+    );
+    this.userSelection.end_date = dateToDatePicker(
+      moment().format("YYYY-MM-DD")
+    );
+    this.userSelection.current_date = dateToDatePicker(
+      moment().format("YYYY-MM-DD")
+    );
+
+    this.userSelectionService.writeUserSelectionCurrent(this.userSelection);
+    this.userSelection = this.userSelectionService.readUserSelectionCurrent();
   }
 }

@@ -37,7 +37,7 @@
             ],
             "styles": [
               "shared/styles/app.scss",
-              "projects/init/src/app/shared/styles/styles.scss"
+              "projects/init/src/shared/styles/styles.scss"
             ],
             "scripts": ["node_modules/jquery/dist/jquery.slim.js"]
           },
@@ -103,7 +103,7 @@
             ],
             "styles": [
               "shared/styles/app.scss",
-              "projects/init/src/app/shared/styles/styles.scss"
+              "projects/init/src/shared/styles/styles.scss"
             ],
             "scripts": []
           }
@@ -168,7 +168,7 @@
             ],
             "styles": [
               "shared/styles/app.scss",
-              "projects/view/src/app/shared/styles/styles.scss"
+              "projects/view/src/shared/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -234,7 +234,7 @@
             ],
             "styles": [
               "shared/styles/app.scss",
-              "projects/view/src/app/shared/styles/styles.scss"
+              "projects/view/src/shared/styles/styles.scss"
             ],
             "scripts": []
           }

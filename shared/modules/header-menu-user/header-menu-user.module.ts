@@ -21,7 +21,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     NowModule,
     ConnectionModule,
 
-    BsDropdownModule,
+    BsDropdownModule.forRoot(),
     CollapseModule,
 
     FontAwesomeModule,
@@ -30,4 +30,4 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
   ],
   exports: [HeaderMenuUserComponent]
 })
-export class HeaderMenuUserModule {}
+export class HeaderMenuUserModule { }
