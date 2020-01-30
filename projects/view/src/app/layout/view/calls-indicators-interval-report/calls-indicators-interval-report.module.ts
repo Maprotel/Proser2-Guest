@@ -19,6 +19,10 @@ import { SelectorModule } from "shared/modules/selector/selector.module";
 
 import { ReportHeaderModule } from "projects/view/src/shared/modules/report-header/report-header.module";
 
+import { DisplayHeaderModule } from "projects/view/src/shared/modules/display-header/display-header.module";
+
+
+
 import { ReportFinderModule } from "projects/view/src/shared/modules/report-finder/report-finder.module";
 
 
@@ -51,6 +55,8 @@ import { ExcelService } from 'projects/view/src/shared/services';
     SelectorModule,
     ReportHeaderModule,
     ReportFinderModule,
+
+    DisplayHeaderModule,
 
     CallsIndicatorsByIntervalReportRoutingModule
   ],

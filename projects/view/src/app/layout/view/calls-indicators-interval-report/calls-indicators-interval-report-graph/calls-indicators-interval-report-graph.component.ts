@@ -71,7 +71,7 @@ export class CallsIndicatorsByIntervalReportGraphComponent implements OnInit, On
         llamadas_atendidas_60s: x.inboundBeforeMinute,
         nivel_servicio: x.inboundServiceLevel,
         nivel_atencion: x.inboundAttentionLevel,
-        graphLabel: x.interval_start
+        graphLabel: x.interval_end
       };
     });
   }

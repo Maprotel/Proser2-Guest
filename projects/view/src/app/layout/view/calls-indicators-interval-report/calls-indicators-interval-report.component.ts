@@ -62,11 +62,14 @@ export class CallsIndicatorsByIntervalReportComponent implements OnInit {
 
     // Selector
     this.selectorVisibleFields = new UserSelectionModel("selectorVisibleFields");
+    this.selectorVisibleFields.start_date = true;
+    this.selectorVisibleFields.end_date = true;
+
     this.selectorVisibleFields.start_time = false;
     this.selectorVisibleFields.end_time = false;
 
     this.selectorVisibleFields.groupBy = false;
-    this.selectorVisibleFields.interval = true;
+    this.selectorVisibleFields.interval = false;
     this.selectorVisibleFields.last_minutes = false;
 
     this.selectorVisibleFields.auxiliar = false;
@@ -74,8 +77,8 @@ export class CallsIndicatorsByIntervalReportComponent implements OnInit {
 
     this.selectorVisibleAreas = {
       date: true,
-      interval: true,
-      options: true,
+      interval: false,
+      options: false,
       buttons: true,
     }
 
