@@ -69,7 +69,7 @@ export class CallsIndicatorsByIntervalReportComponent implements OnInit {
     this.selectorVisibleFields.end_time = false;
 
     this.selectorVisibleFields.groupBy = false;
-    this.selectorVisibleFields.interval = false;
+    this.selectorVisibleFields.interval = true;
     this.selectorVisibleFields.last_minutes = false;
 
     this.selectorVisibleFields.auxiliar = false;
