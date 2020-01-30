@@ -73,5 +73,6 @@
     "mydate",
     "stepinterval",
     "userbases"
-  ]
+  ],
+  "cSpell.enabled": false
 }

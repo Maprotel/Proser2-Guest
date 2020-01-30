@@ -20,15 +20,17 @@ import { UserSelectionModel } from "shared/models";
 // Global shared services
 import { AlertService } from "shared/services";
 import { UserSelectionService } from "shared/services/crud/system/user-selection.service";
-import { ExcelService } from "sections/reports/src/shared/services/helpers/excel.service";
+import { ExcelService } from "projects/view/src/shared/services/helpers/excel.service";
 
 // Local models
-import { BackendResponseModel } from "sections/reports/src/shared/models/reports/backendResponse.model";
+import { BackendResponseModel } from "projects/view/src/shared/models/backendResponse.model";
 
 // Local shared
 
-import { CallsIndicatorsByIntervalService } from "sections/reports/src/shared/services/reports/calls/reports-calls-indicators-interval.service";
-import { CallsIndicatorsByIntervalModel } from "sections/reports/src/shared/models/reports/calls/CallsIndicatorsByInterval.model";
+import { CallsIndicatorsByIntervalService } from "projects/view/src/shared/services/calls/reports-calls-indicators-interval.service";
+
+import { CallsIndicatorsByIntervalModel } from "projects/view/src/shared/models/calls/CallsIndicatorsByInterval.model";
+
 import { CallsIndicatorsByIntervalReportGraphComponent } from "../calls-indicators-interval-report-graph/calls-indicators-interval-report-graph.component";
 
 @Component({

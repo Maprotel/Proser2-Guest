@@ -18,6 +18,14 @@ const routes: Routes = [
           import("./view/display-monitor/display-monitor.module").then(
             m => m.DisplayMonitorModule
           )
+      },
+
+      {
+        path: "view-interval",
+        loadChildren: () =>
+          import("./view/calls-indicators-interval-report/calls-indicators-interval-report.module").then(
+            m => m.CallsIndicatorsByIntervalReportModule
+          )
       }
     ]
   }

@@ -11,7 +11,7 @@ import { Observable, Subscription, timer } from "rxjs";
 
 import { UserSelectionModel } from "shared/models";
 
-import { CallsInboundDailyModel } from "sections/reports/src/shared/models/reports/calls/CallsInboundDaily.model";
+import { CallsInboundDailyModel } from "projects/view/src/shared/models/calls/CallsInboundDaily.model";
 
 @Component({
   selector: "app-reports-calls-indicators-interval-report-graph",

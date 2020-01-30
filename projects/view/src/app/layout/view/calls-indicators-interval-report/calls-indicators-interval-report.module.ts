@@ -17,8 +17,9 @@ import { NgSelectModule } from "@ng-select/ng-select";
 
 import { SelectorModule } from "shared/modules/selector/selector.module";
 
-import { ReportHeaderModule } from "sections/reports/src/shared/modules/report-header/report-header.module";
-import { ReportFinderModule } from "sections/reports/src/shared/modules/report-finder/report-finder.module";
+import { ReportHeaderModule } from "projects/view/src/shared/modules/report-header/report-header.module";
+
+import { ReportFinderModule } from "projects/view/src/shared/modules/report-finder/report-finder.module";
 
 
 import { CallsIndicatorsByIntervalReportRoutingModule } from "./calls-indicators-interval-report-routing.module";
@@ -27,7 +28,7 @@ import { CallsIndicatorsByIntervalReportListComponent } from "./calls-indicators
 
 import { CallsIndicatorsByIntervalReportGraphComponent } from "./calls-indicators-interval-report-graph/calls-indicators-interval-report-graph.component";
 
-import { ExcelService } from 'sections/reports/src/shared/services';
+import { ExcelService } from 'projects/view/src/shared/services';
 
 
 @NgModule({
